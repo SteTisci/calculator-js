@@ -9,15 +9,24 @@
 *::after {
     padding: 0;
     margin: 0;
+    flex-wrap: wrap;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
 }
 
 /* Style for body */
 body {
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    box-sizing: border-box;
+    align-items: center;
     background-color: rgba(2, 100, 150, 0.80);
+    margin-bottom: 100px;
 }
+
 
 /* Style for main container */
 .calculator {
@@ -98,4 +107,22 @@ button {
 /* Style for equal button */
 button.equal {
     width: 144px;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    width: 100%;
+    padding-bottom: 5px;
+}
+
+.author-name {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #F2F2F2;
 }
