@@ -48,7 +48,7 @@ const divide = (num1, num2) => (num2 === 0 ? "ERROR" : num1 / num2);
 const module = (num1, num2) => (num2 === 0 ? "ERROR" : num1 % num2);
 
 function displayNumber(value) {
-  // limits the length of the digits
+  // limits the length of the numbers
   if (currentOperand.textContent.length >= MAX_LENGTH) return;
 
   if (calculatorState.shouldResetScreen) {
@@ -71,7 +71,7 @@ function displayOperator(value) {
 
 function addDecimalPoint() {
   // add a 0 before the decimal when no number has been inserted
-  if (calculatorState.shouldResetScreen) {
+  if (calculatorState.shouldResetScreen || !currentOperand.textContent) {
     currentOperand.textContent = "0";
     calculatorState.shouldResetScreen = false;
   }
@@ -99,9 +99,10 @@ function evaluate() {
     return;
   }
 
+  // Control to round or convert the result based on the number type
   if (result % 1 !== 0) {
     result = result.toFixed(3);
-  } else if (result > Number.MAX_SAFE_INTEGER) {
+  } else if (result > Number.MAX_SAFE_INTEGER || result < Number.MIN_SAFE_INTEGER) {
     result = result.toExponential(3);
   } else {
     result = Math.round(result * 100) / 100;
@@ -121,6 +122,7 @@ function removeElement() {
 function clearScreen(...paragraphs) {
   paragraphs.map((p) => (p.textContent = ""));
 
+  // Reset the calculator state when the sceen is cleared
   calculatorState.firstNumber = "";
   calculatorState.secondNumber = "";
   calculatorState.operator = null;
